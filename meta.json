@@ -1,0 +1,13 @@
+{
+  "name": "zack:animalsoundspammer",
+  "visibility": "public",
+  "url": "https://github.com/zaporter-work/animalsoundspammer",
+  "description": "it does what it says it does",
+  "models": [
+    {
+      "api": "rdk:component:generic",
+      "model": "zack:random:animalsoundspammer"
+    }
+  ],
+  "entrypoint": "./bin/module"
+}
