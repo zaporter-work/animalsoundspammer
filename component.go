@@ -2,6 +2,7 @@ package templategomodule
 
 import (
 	"context"
+	"fmt"
 	"time"
 
 	"github.com/edaniels/golog"
@@ -14,7 +15,7 @@ import (
 )
 
 var (
-	Model = resource.NewModel("zaporter", "builtin", "template")
+	Model = resource.NewModel("zack", "random", "animalsoundspammer")
 )
 
 func init() {
@@ -64,7 +65,7 @@ func (c *component) startBgProcess() {
 		for {
 			select {
 			case <-ticker.C:
-				c.logger.Info(c.cfg.Message + "BBB")
+				c.logger.Info(fmt.Sprintf("the cow says: %s", c.cfg.Message))
 			case <-c.cancelCtx.Done():
 				c.logger.Info("shutdown")
 				return

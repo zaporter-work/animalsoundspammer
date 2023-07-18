@@ -1,11 +1,13 @@
-module github.com/zaporter-work/TemplateGoModule
+module github.com/zaporter-work/animalsoundspammer
 
 go 1.19
 
 require (
 	github.com/edaniels/golog v0.0.0-20230215213219-28954395e8d0
-	go.viam.com/rdk v0.3.0
-	go.viam.com/utils v0.1.36
+	github.com/pkg/errors v0.9.1
+	go.opencensus.io v0.24.0
+	go.viam.com/rdk v0.4.0
+	go.viam.com/utils v0.1.37
 )
 
 require (
@@ -86,7 +88,6 @@ require (
 	github.com/pion/transport/v2 v2.2.1 // indirect
 	github.com/pion/turn/v2 v2.1.0 // indirect
 	github.com/pion/webrtc/v3 v3.2.6 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.4.4 // indirect
 	github.com/rs/cors v1.9.0 // indirect
@@ -103,12 +104,11 @@ require (
 	github.com/ziutek/mymysql v1.5.4 // indirect
 	go-hep.org/x/hep v0.32.1 // indirect
 	go.mongodb.org/mongo-driver v1.11.6 // indirect
-	go.opencensus.io v0.24.0 // indirect
 	go.uber.org/atomic v1.10.0 // indirect
 	go.uber.org/goleak v1.2.1 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
 	go.uber.org/zap v1.24.0 // indirect
-	go.viam.com/api v0.1.132 // indirect
+	go.viam.com/api v0.1.143 // indirect
 	go.viam.com/test v1.1.1-0.20220913152726-5da9916c08a2 // indirect
 	golang.org/x/crypto v0.10.0 // indirect
 	golang.org/x/exp v0.0.0-20230510235704-dd950f8aeaea // indirect

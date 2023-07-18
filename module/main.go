@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"github.com/edaniels/golog"
-	templategomodule "github.com/zaporter-work/TemplateGoModule"
+	templategomodule "github.com/zaporter-work/animalsoundspammer"
 	"go.viam.com/rdk/components/generic"
 	"go.viam.com/rdk/module"
 
@@ -17,7 +17,7 @@ var (
 )
 
 func main() {
-	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("templateModule"))
+	utils.ContextualMain(mainWithArgs, module.NewLoggerFromArgs("animalSoundSpammer"))
 }
 func mainWithArgs(ctx context.Context, args []string, logger golog.Logger) error {
 	var versionFields []interface{}
@@ -28,9 +28,9 @@ func mainWithArgs(ctx context.Context, args []string, logger golog.Logger) error
 		versionFields = append(versionFields, "git_rev", GitRevision)
 	}
 	if len(versionFields) != 0 {
-		logger.Infow("templateModule", versionFields...)
+		logger.Infow("animalSoundSpammer", versionFields...)
 	} else {
-		logger.Info("templateModule" + " built from source; version unknown")
+		logger.Info("animalSoundSpammer" + " built from source; version unknown")
 	}
 	mod, err := module.NewModuleFromArgs(ctx, logger)
 	if err != nil {
