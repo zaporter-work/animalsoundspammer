@@ -9,5 +9,5 @@
       "model": "zack:random:animalsoundspammer"
     }
   ],
-  "entrypoint": "./bin/module"
+  "entrypoint": "module"
 }

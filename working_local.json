@@ -1,0 +1,28 @@
+{
+  "components": [
+    {
+      "attributes": {
+        "message": "hi"
+      },
+      "depends_on": [],
+      "name": "spammer",
+      "type": "generic",
+      "model": "zack:random:animalsoundspammer"
+    }
+  ],
+  "modules": [
+    {
+      "executable_path": "/host/animal",
+      "type":"registry",
+      "name": "mycoolmodule"
+    }
+  ],
+  "packages": [
+    {
+      "name": "blah",
+      "package": "43e11169-62e6-4dda-96b1-be2cad5d1878/animalsoundspammer",
+      "type": "module",
+      "version": "0.1.1"
+    }
+  ]
+}

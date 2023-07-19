@@ -1,0 +1,20 @@
+{
+  "modules": [
+    {
+      "name": "zack:animalsoundspammer",
+      "version": "0.1.1",
+      "type": "registry"
+    }
+  ],
+  "components": [
+    {
+      "model": "zack:random:animalsoundspammer",
+      "attributes": {
+        "message": "hi roxy and michael"
+      },
+      "depends_on": [],
+      "name": "spammer",
+      "type": "generic"
+    }
+  ]
+}
