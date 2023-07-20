@@ -7,6 +7,7 @@ import (
 
 type Config struct {
 	Message string `json:"message"`
+    Animals []string `json:"animals"`
 }
 
 // Validate takes the current location in the config (useful for good error messages).

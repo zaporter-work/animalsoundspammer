@@ -3,6 +3,7 @@ package templategomodule
 import (
 	"context"
 	"fmt"
+	"math/rand"
 	"time"
 
 	"github.com/edaniels/golog"
@@ -55,6 +56,9 @@ func createComponent(ctx context.Context, deps resource.Dependencies, conf resou
 		logger:     logger,
 	}
 	instance.logger.Infoln("message", newConf.Message)
+    if len(instance.cfg.Animals) == 0 {
+        instance.cfg.Animals = []string{"cow", "pig", "goat"}
+    }
 	instance.startBgProcess()
 	return instance, nil
 }
@@ -65,7 +69,7 @@ func (c *component) startBgProcess() {
 		for {
 			select {
 			case <-ticker.C:
-				c.logger.Info(fmt.Sprintf("the cow says: %s", c.cfg.Message))
+				c.logger.Info(fmt.Sprintf("the %s says: %s", c.cfg.Animals[rand.Intn(len(c.cfg.Animals))], c.cfg.Message))
 			case <-c.cancelCtx.Done():
 				c.logger.Info("shutdown")
 				return
