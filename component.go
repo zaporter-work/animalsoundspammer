@@ -4,6 +4,8 @@ import (
 	"context"
 	"fmt"
 	"math/rand"
+	"os"
+	"path/filepath"
 	"time"
 
 	"github.com/edaniels/golog"
@@ -11,6 +13,7 @@ import (
 	"go.opencensus.io/trace"
 	"go.viam.com/rdk/components/generic"
 	"go.viam.com/rdk/resource"
+	"go.viam.com/rdk/services/vision"
 
 	"go.viam.com/utils"
 )
@@ -33,13 +36,16 @@ type component struct {
 	resource.AlwaysRebuild
 	cfg *Config
 
-	cancelCtx  context.Context
-	cancelFunc func()
+	cancelCtx     context.Context
+	cancelFunc    func()
+	moduleDataDir string
+	vs     vision.Service
 
 	logger golog.Logger
 }
 
 func createComponent(ctx context.Context, deps resource.Dependencies, conf resource.Config, logger golog.Logger) (resource.Resource, error) {
+    
 	logger.Warnln("create Component")
 	ctx, span := trace.StartSpan(ctx, "zaporter::New")
 	defer span.End()
@@ -49,16 +55,23 @@ func createComponent(ctx context.Context, deps resource.Dependencies, conf resou
 	}
 	cancelCtx, cancelFunc := context.WithCancel(context.Background())
 	instance := &component{
-		Named:      conf.ResourceName().AsNamed(),
-		cfg:        newConf,
-		cancelCtx:  cancelCtx,
-		cancelFunc: cancelFunc,
-		logger:     logger,
+		Named:         conf.ResourceName().AsNamed(),
+		cfg:           newConf,
+		cancelCtx:     cancelCtx,
+		cancelFunc:    cancelFunc,
+		moduleDataDir: os.Getenv("VIAM_MODULE_DATA"),
+		logger:        logger,
 	}
+	if instance.moduleDataDir != "" {
+		instance.logger.Infoln("data_dir", instance.moduleDataDir)
+		content := "hello - zack"
+		os.WriteFile(filepath.Join(instance.moduleDataDir, "info.txt"), []byte(content), os.ModePerm)
+	}
+
 	instance.logger.Infoln("message", newConf.Message)
-    if len(instance.cfg.Animals) == 0 {
-        instance.cfg.Animals = []string{"cow", "pig", "goat"}
-    }
+	if len(instance.cfg.Animals) == 0 {
+		instance.cfg.Animals = []string{"cow", "pig", "goat", "elephant"}
+	}
 	instance.startBgProcess()
 	return instance, nil
 }
@@ -69,6 +82,9 @@ func (c *component) startBgProcess() {
 		for {
 			select {
 			case <-ticker.C:
+				if os.Getenv("HI_ZACK") == "hi" {
+					c.logger.Info(fmt.Sprintf("zack says: %s", c.cfg.Message))
+				}
 				c.logger.Info(fmt.Sprintf("the %s says: %s", c.cfg.Animals[rand.Intn(len(c.cfg.Animals))], c.cfg.Message))
 			case <-c.cancelCtx.Done():
 				c.logger.Info("shutdown")

@@ -33,6 +33,10 @@ test:
 build: 
 	mkdir -p bin && CGO_ENABLED=0 CGO_LDFLAGS=${CGO_LDFLAGS} go build $(GO_BUILD_LDFLAGS) -o bin/module module/main.go
 
+.PHONY: build
+build-dynamic: 
+	mkdir -p bin-dyn && go build -o bin-dyn/module module/main.go
+
 .PHONY: package
 package: build
 	mkdir -p package && tar -czf ./package/module.tar.gz ./bin/module
