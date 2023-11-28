@@ -13,7 +13,6 @@ import (
 	"go.opencensus.io/trace"
 	"go.viam.com/rdk/components/generic"
 	"go.viam.com/rdk/resource"
-	"go.viam.com/rdk/services/vision"
 
 	"go.viam.com/utils"
 )
@@ -39,13 +38,12 @@ type component struct {
 	cancelCtx     context.Context
 	cancelFunc    func()
 	moduleDataDir string
-	vs     vision.Service
 
 	logger golog.Logger
 }
 
 func createComponent(ctx context.Context, deps resource.Dependencies, conf resource.Config, logger golog.Logger) (resource.Resource, error) {
-    
+
 	logger.Warnln("create Component")
 	ctx, span := trace.StartSpan(ctx, "zaporter::New")
 	defer span.End()
